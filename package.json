@@ -10,6 +10,7 @@
   "author": "Kedar G",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "lodash": "^4.17.4"
   }
 }
