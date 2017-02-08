@@ -1,39 +1,50 @@
 (function () {
   'use strict';
 
+  // Node Packages
   var _ = require('lodash'),
     request = require('request');
 
   var apiKey = '616201ffa86a4fbca11abf770b9e1286',
     apiUrl = 'https://newsapi.org/v1/articles?sortBy=top&apiKey=' + apiKey,
-    newsSources = {
+    primarySources = {
+      us: 'the-washington-post'
+    }, newsSources = {
       us: ['the-washington-post', 'cnn']
-    }, newsResponses = {}, requestData;
+    }, primaryResponse = {},
+    newsResponses = {};
 
-  _.each([1, 2, 3, 5], function (i) {
-    console.log('value: ', i);
-  });
+    module.exports = {
+      requestData: function (country) {
+        var sources = _.get(newsSources, country, []),
+          requestOptions = {
+            timeout: 3000,
+            json: true,
+          };
 
-  requestData = function (sources) {
-    _.each(sources, function (source) {
-      var requestUrl = apiUrl + '&source=' + source;
+        if (_.get(primaryResponse, country)) {
+          // data already exists. return it.
+        } else {
+          newsResponses[country] = [];
+          _.each(sources, function (source) {
+            var requestUrl = apiUrl + '&source=' + source;
 
-      request
-        .get(requestUrl)
-        .on('response', function(response) {
-          console.log('Requesting from: ', requestUrl);
-          if (response.statusCode === 200) {
-            newsResponses[source] = response.data;
-            console.log('response.articles: ', response.data);
-          }
-          // console.log(response.headers['content-type'])
-        })
-        .on('error', function(err) {
-          console.log(err)
-        });
-    });
-  };
-
-  requestData(newsSources.us);
-
+            requestOptions.url = requestUrl;
+            request.get(requestOptions, function(error, response, data) {
+              if (!error && response.statusCode === 200) {
+                if (source === primarySources[country]) {
+                  primaryResponse[country] = data.articles;
+                } else {
+                  console.log('here ');
+                  _.each(data.articles, function (article) {
+                    newsResponses[country].push(_.pick(article, ['title', 'description', 'url']));
+                  });
+                }
+                return newsResponses[country];
+              }
+            });
+          });
+        }
+      }
+    };
 })();
