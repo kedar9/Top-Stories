@@ -13,14 +13,16 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/news', function(req, res) {
-  res.promise(actions.requestData('us').then(function (result) {
-      console.log('i am here');
-      console.log(result);
-      res.json();
-  }))
+app.get('/news', function(req, res, next) {
+
+    actions.requestData('us')
+    .then(function (result) {
+        console.log('i am here');
+        //   console.log(result);
+        res.json(result);
+    });
 });
 
 app.listen(port, function () {
-  console.log('App listening on port ' + port);
+    console.log('App listening on port ' + port);
 });
