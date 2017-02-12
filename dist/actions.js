@@ -3,23 +3,29 @@
 
     // Node Packages
     var _ = require('lodash'),
-    request = require('request-promise'),
-    promise = require('bluebird'),
-    similarity = require('string-similarity');
+    	request = require('request-promise'),
+    	promise = require('bluebird'),
+    	similarity = require('string-similarity');
 
-    var apiKey = '616201ffa86a4fbca11abf770b9e1286',
+    var exports = module.exports,
+				apiKey = '616201ffa86a4fbca11abf770b9e1286',
         apiUrl = 'https://newsapi.org/v1/articles?sortBy=top&apiKey=' + apiKey,
-        primarySources = {
-            us: 'the-washington-post'
-        }, newsSources = {
-            us: ['associated-press', 'cnn', 'usa-today', 'the-washington-post', 'bloomberg', 'newsweek', 'reuters', 'the-huffington-post', 'the-new-york-times', 'google-news', 'the-wall-street-journal', 'fortune']
-        }, topStories = {}, sortNews, get;
+        newsSources = {
+            us: ['associated-press', 'cnn', 'usa-today', 'the-washington-post', 'bloomberg', 'newsweek', 'reuters', 'the-huffington-post', 'the-new-york-times', 'google-news', 'the-wall-street-journal', 'fortune'],
+            gb: ['sky-news', 'bbc-news', 'the-guardian-uk', 'the-telegraph', 'independent', 'daily-mail'],
+						in: ['the-hindu', 'the-times-of-india'],
+						de: ['der-tagesspiegel', 'focus', 'die-zeit', 'spiegel-online', 'bild'],
+						au: ['abc-news-au', 'the-guardian-au']
+        }, sortNews, get;
 
     // TODO: Remove this
     apiKey = '3e22f2fcc1344975ae2b2e69379e2a6e';
     sortNews = function (newsResponses) {
-        var primary = newsResponses.shift(),
+        var minMatch = (newsResponses.length / (newsResponses.length + 2)),
+						primary = newsResponses.shift(),
             secondary = [];
+
+				console.log('minMatch: ', minMatch);
 
         _.each(newsResponses, function (response) {
             // Loop through newsResponses for "related" news
@@ -46,10 +52,10 @@
                 _.each(secondary, function (acticleSec) {
                     if (!_.isEmpty(acticleSec.title) && !_.isEmpty(acticleSec.description)) {
                         var titleMatch = similarity.compareTwoStrings(articlePri.title, acticleSec.title),
-                        descMatch = similarity.compareTwoStrings(articlePri.description, acticleSec.description),
-                        totalMatch = titleMatch + descMatch;
+                        	descMatch = similarity.compareTwoStrings(articlePri.description, acticleSec.description),
+                        	totalMatch = titleMatch + descMatch;
 
-                        if (totalMatch > 0.81) {
+                        if (totalMatch > 0.75) {
                             console.log(acticleSec.source);
                             console.log(acticleSec.title);
                             console.log(acticleSec.description);
@@ -59,7 +65,8 @@
                 });
             }
         });
-        _.sortBy(primary.articles, function(article) {
+
+        _.sortBy(primary.articles, function (article) {
             return (_.get(article, 'related')) ? article.related.length : 0;
         });
         return primary;
@@ -75,29 +82,30 @@
         return request(requestOptions);
     };
 
-    module.exports = {
-        requestData: function (country) {
-            var sources = _.get(newsSources, country, []),
-            requestUrls = [];
+		// Exports
+		exports.topStories = {};
+		exports.defaultCountry = 'us';
+    exports.requestData = function (country) {
+				var requestUrls = [], sources, minSources;
 
-            console.log(_.get(topStories, country, 'YEAH!!!'));
-            if (_.get(topStories, country)) {
-                // data already exists. return it.
-                return topStories[country];
-            } else {
-                _.each(sources, function (source) {
-                    var requestUrl = apiUrl + '&source=' + source;
+				if (_.keys(newsSources).indexOf(country) === -1) {
+						country = exports.defaultCountry;
+				}
 
-                    requestUrls.push(get(requestUrl));
-                });
+        sources = _.get(newsSources, country, []);
+        minSources = Math.ceil(sources.length / 2);
 
-                return promise.some(requestUrls, 6).then(function (response) {
-                    var sortedNews = sortNews(response);
+        _.each(sources, function (source) {
+            var requestUrl = apiUrl + '&source=' + source;
 
-                    topStories[country] = sortedNews;
-                    return sortedNews;
-                });
-            }
-        }
+            requestUrls.push(get(requestUrl));
+        });
+
+        return promise.some(requestUrls, minSources).then(function (response) {
+            var sortedNews = sortNews(response);
+
+            exports.topStories[country] = sortedNews;
+            return sortedNews;
+        });
     };
 })();
