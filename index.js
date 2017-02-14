@@ -8,6 +8,7 @@ var port = process.env.PORT || 3000;
 var actions = require('./dist/actions.js');
 console.log('apiUrl:: ', actions);
 
+// Expose static content from /dist/ on path /static/
 app.use('/static', express.static(__dirname + '/dist'));
 
 app.get('/', function(req, res) {
