@@ -1,12 +1,73 @@
-body {
-    font-family: 'Heebo', sans-serif;
+html {
+  height: 100%;
 }
 
-.page-wrap {
-    max-width: 1080px;
-    margin: 0 auto;
+body  {
+  height: 100%;
+  font-family: 'Heebo', sans-serif;
+  font-size: 10px;
+  background-color: #fbfbfb;
+}
+
+.container {
+  height: 100%;
+  padding: 0;
 }
 
 .countries .btn {
-    text-transform: uppercase;
+  text-transform: uppercase;
+}
+
+.news-wrap {
+  height: 100%;
+}
+
+.story {
+  height: 50%;
+  background-size: cover;
+  position: relative;
+}
+
+.stick {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(0.5em);
+}
+
+.flow {
+  z-index: 99;
+  background-color: #fbfbfb;
+  padding: 0 5em;
+}
+
+.story-image--blur {
+  height: 100%;
+}
+
+.story-image {
+  width: 25em;
+  height: 25em;
+  margin-top: -12.5em;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 50%;
+}
+
+.story-image:hover {
+  border-radius: 3%;
+}
+
+.story-title {
+  margin-top: -12em;
+}
+
+.story-title h3 {
+  font-family: 'Khand', sans-serif;
+  background-color: #fbfbfb;
+  padding: 0.5em 1em;
+  height: 3em;
+  display: table-cell;
+  vertical-align: middle;
 }
