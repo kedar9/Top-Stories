@@ -10,7 +10,7 @@ div {
 	transition: 1s ease;
 }
 
-/*.container {
+.container {
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -72,4 +72,4 @@ div {
     width: 1140px;
     max-width: 100%;
   }
-}*/
+}

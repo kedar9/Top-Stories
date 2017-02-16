@@ -6,20 +6,45 @@ body  {
   height: 100%;
   font-family: 'Heebo', sans-serif;
   font-size: 10px;
-  background-color: #fbfbfb;
+  background-color: #f24a4a;
 }
 
-.container {
+a {
+    text-decoration: none;
+}
+
+.btn {
+  text-transform: uppercase;
+}
+
+.text-large {
+    font-size: 4em;
+}
+
+.text-medium {
+  font-size: 2em;
+}
+
+.text-small {
+  font-size: 1.5em;
+}
+
+.content {
   height: 100%;
   padding: 0;
 }
 
+.countries {
+  text-align: right;
+}
+
 .countries .btn {
-  text-transform: uppercase;
+  color: #fbfbfb;
 }
 
 .news-wrap {
   height: 100%;
+  overflow: hidden;
 }
 
 .story {
@@ -33,12 +58,20 @@ body  {
   background-position: center;
   background-repeat: no-repeat;
   filter: blur(0.5em);
+  -webkit-transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
 }
 
 .flow {
-  z-index: 99;
+  color: #f24a4a;
   background-color: #fbfbfb;
   padding: 0 5em;
+  border-top: 3px solid #f24a4a;
+  z-index: 99; /* Remove if unused */
+}
+
+.story-header {
+  margin-top: -12.5em;
 }
 
 .story-image--blur {
@@ -48,7 +81,6 @@ body  {
 .story-image {
   width: 25em;
   height: 25em;
-  margin-top: -12.5em;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -60,14 +92,19 @@ body  {
 }
 
 .story-title {
-  margin-top: -12em;
-}
-
-.story-title h3 {
   font-family: 'Khand', sans-serif;
-  background-color: #fbfbfb;
-  padding: 0.5em 1em;
+  color: #fbfbfb;
+  background-color: #f24a4a;
+  padding: 0.25em 1em;
   height: 3em;
   display: table-cell;
   vertical-align: middle;
+}
+
+.story-desc {
+  margin: 1.5em;
+}
+
+.story-desc a {
+  margin-top: 1em;
 }

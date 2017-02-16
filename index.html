@@ -14,15 +14,15 @@
 	<link href="https://fonts.googleapis.com/css?family=Heebo:400,700|Khand:700" rel="stylesheet">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" type="text/css" href="static/css/styles.css" />
-	<title>Title goes here</title>
+	<title>Top Stories</title>
 </head>
 <body>
-	<div class="container" ng-app="newsApp" ng-controller="newsCtrl">
-		<header class="navbar">
-			<section class="navbar-section">
+	<div class="content" ng-app="newsApp" ng-controller="newsCtrl">
+		<header class="container columns">
+			<section class="column col-6">
 				<a href="#" class="navbar-brand">top stories</a>
 			</section>
-			<section class="navbar-section countries">
+			<section class="column col-6 countries tomato">
 				<a href="/?country=us" class="btn btn-link">USA</a>
 				<a href="/?country=gb" class="btn btn-link">UK</a>
 				<a href="/?country=in" class="btn btn-link">India</a>
@@ -34,11 +34,32 @@
     <div class="news-wrap" ng-repeat="story in topStories">
         <div class="story stick" style="background-image:url('{{story.urlToImage}}')">
         </div>
-        <div class="story flow columns">
-          <div class="column col-4 story-image" style="background-image:url('{{story.urlToImage}}')">
+        <div class="story flow">
+          <div class="columns container story-header">
+            <div class="column col-4 story-image" style="background-image:url('{{story.urlToImage}}')"></div>
+            <div class="column col-8">
+              <div class="story-title text-large">{{ story.title }}</div>
+              <div class="story-desc text-medium">
+                {{ story.description }}
+                <div>
+                  <a href="{{ story.url }}" target="_blank" class="btn btn-primary">
+                    Read Entire Story
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="column col-8 story-title">
-            <h3>{{ story.title }}</h3>
+          <div class="story-related">
+            <div class="text-medium">
+              Related Stories:
+            </div>
+            <div class="columns">
+              <div class="story-related column col-3" ng-repeat="related in story.related | limitTo : 4">
+                <a href="{{ related.url }}" target="_blank" class="text-small">
+                  {{ related.title }} <br /> {{ related.source | uppercase }}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
     </div>

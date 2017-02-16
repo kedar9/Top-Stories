@@ -33,7 +33,7 @@
 
       _.each (response.articles, function (article) {
         // Add source to every article
-        article.source = _source;
+        article.source = _.startCase(_source);
         // `secondary` becomes an array of articles from all news sources
         // except the first one that became the `primary`.
         secondary.push(article);
@@ -69,6 +69,7 @@
     _.sortBy(primary.articles, function (article) {
       return (_.get(article, 'related')) ? article.related.length : 0;
     });
+    console.log(primary);
     return primary;
   };
 
