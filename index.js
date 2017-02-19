@@ -24,6 +24,8 @@ app.get('/news', function(req, res, next) {
 		} else {
 				actions.requestData(country)
 				.then(function (result) {
+            console.log('RESULT');
+            console.log(result);
 		        res.json(result);
 		    });
 		}

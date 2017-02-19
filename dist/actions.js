@@ -65,9 +65,9 @@
         });
       }
     });
-
-    _.sortBy(primary.articles, function (article) {
-      return (_.get(article, 'related')) ? article.related.length : 0;
+    // Sort articles by number of related articles - descending 
+    primary.articles.sort(function(a, b) {
+        return b.related.length - a.related.length;
     });
     console.log(primary);
     return primary;

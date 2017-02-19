@@ -19,39 +19,47 @@
 <body>
 	<div class="content" ng-app="newsApp" ng-controller="newsCtrl">
 		<header class="container columns">
-			<section class="column col-6">
+			<section class="column col-6 col-sm-12">
 				<a href="#" class="navbar-brand">top stories</a>
 			</section>
-			<section class="column col-6 countries tomato">
-				<a href="/?country=us" class="btn btn-link">USA</a>
-				<a href="/?country=gb" class="btn btn-link">UK</a>
-				<a href="/?country=in" class="btn btn-link">India</a>
-				<a href="/?country=de" class="btn btn-link">Germany</a>
-				<a href="/?country=au" class="btn btn-link">Australia</a>
+			<section class="column col-6 col-sm-12 countries">
+				<a ng-repeat="country in countries" href="/?country={{ country.code }}" class="btn btn-link">
+          {{ country.name }}
+        </a>
 			</section>
 		</header>
 
-    <div class="news-wrap" ng-repeat="story in topStories">
-        <div class="story stick" style="background-image:url('{{story.urlToImage}}')">
+    <div class="text-center text-large" ng-if="!topStories">
+      Loading...
+    </div>
+
+    <div class="news-wrap" ng-if="topStories.length" ng-repeat="story in topStories">
+        <div class="story stick"
+             style="background-image:url('{{story.urlToImage}}'), url('https://img.clipartfest.com/1c962854b2df5184288428f9a17084cf_world-globe-clipart-3-globe-of-the-world-clipart_1000-983.jpeg')">
         </div>
         <div class="story flow">
           <div class="columns container story-header">
-            <div class="column col-4 story-image" style="background-image:url('{{story.urlToImage}}')"></div>
-            <div class="column col-8">
+            <div class="column col-4 story-image"
+                 style="background-image:url('{{story.urlToImage}}'), url('https://img.clipartfest.com/1c962854b2df5184288428f9a17084cf_world-globe-clipart-3-globe-of-the-world-clipart_1000-983.jpeg')">
+            </div>
+            <div class="column col-8 col-sm-12 story-primary">
               <div class="story-title text-large">{{ story.title }}</div>
               <div class="story-desc text-medium">
-                {{ story.description }}
+                {{ story.description | limitTo: 199 }}
+                <span ng-if="story.description.length > 199">...</span>
                 <div>
                   <a href="{{ story.url }}" target="_blank" class="btn btn-primary">
-                    Read Entire Story
+                    <span ng-hide="country === 'de'">Read Entire Story</span>
+                    <span ng-show="country === 'de'">Lesen Geschichte</span>
                   </a>
                 </div>
               </div>
             </div>
           </div>
           <div class="story-related">
-            <div class="text-medium">
-              Related Stories:
+            <div class="text-medium" ng-if="story.related.length">
+              <span ng-hide="country === 'de'">Related Stories:</span>
+              <span ng-show="country === 'de'">Ähnliche Geschichten:</span>
             </div>
             <div class="columns">
               <div class="story-related column col-3" ng-repeat="related in story.related | limitTo : 4">
