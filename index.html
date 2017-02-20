@@ -20,10 +20,11 @@
 	<div class="content" ng-app="newsApp" ng-controller="newsCtrl">
 		<header class="container columns">
 			<section class="column col-6 col-sm-12">
-				<a href="#" class="navbar-brand">top stories</a>
+				<a href="#" class="navbar-brand">{{ activeCountry }}</a>
 			</section>
 			<section class="column col-6 col-sm-12 countries">
-				<a ng-repeat="country in countries" href="/?country={{ country.code }}" class="btn btn-link">
+				<a ng-repeat="country in countries" href="/?country={{ country.code }}"
+           class="btn btn-link" ng-class="{ 'selected': country.code===activeCountry }">
           {{ country.name }}
         </a>
 			</section>
@@ -43,33 +44,45 @@
                  style="background-image:url('{{story.urlToImage}}'), url('https://img.clipartfest.com/1c962854b2df5184288428f9a17084cf_world-globe-clipart-3-globe-of-the-world-clipart_1000-983.jpeg')">
             </div>
             <div class="column col-8 col-sm-12 story-primary">
-              <div class="story-title text-large">{{ story.title }}</div>
+              <div class="story-title text-large">
+                {{ story.title }}
+              </div>
               <div class="story-desc text-medium">
-                {{ story.description | limitTo: 199 }}
-                <span ng-if="story.description.length > 199">...</span>
+                {{ mainSource | uppercase }}: {{ story.description | limitTo: 199 }}<span ng-if="story.description.length > 199">...</span>
                 <div>
                   <a href="{{ story.url }}" target="_blank" class="btn btn-primary">
-                    <span ng-hide="country === 'de'">Read Entire Story</span>
-                    <span ng-show="country === 'de'">Lesen Geschichte</span>
+                    <span ng-hide="activeCountry === 'de'">Read Entire Story</span>
+                    <span ng-show="activeCountry === 'de'">Lesen Geschichte</span>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="story-related">
+          <div class="related">
             <div class="text-medium" ng-if="story.related.length">
-              <span ng-hide="country === 'de'">Related Stories:</span>
-              <span ng-show="country === 'de'">Ähnliche Geschichten:</span>
+              <ng-pluralize count="story.related.length"
+                            when="{'one': 'Related Story:', 'other': 'Related Stories:'}"
+                            ng-hide="activeCountry === 'de'"></ng-pluralize>
+              <ng-pluralize count="story.related.length"
+                            when="{'one': 'Ähnliche Geschichte:', 'other': 'Ähnliche Geschichten:'}"
+                            ng-show="activeCountry === 'de'"></ng-pluralize>
             </div>
             <div class="columns">
-              <div class="story-related column col-3" ng-repeat="related in story.related | limitTo : 4">
-                <a href="{{ related.url }}" target="_blank" class="text-small">
-                  {{ related.title }} <br /> {{ related.source | uppercase }}
-                </a>
+              <div class="column col-2 story-related text-small" ng-repeat="related in story.related | limitTo : 4">
+                <div class="story-related-source">{{ related.source | uppercase }}</div>
+                <div class="story-related-link">
+                  <a href="{{ related.url }}" target="_blank">
+                    {{ related.title | limitTo: 75 }}<span ng-if="related.title.length > 75">...</span>
+                  </a>
+              </div>
               </div>
             </div>
           </div>
         </div>
+    </div>
+
+    <div class="footer text-center text-small" ng-if="topStories.length">
+      <a href="http://kedar9.com" target="_blank">Made with <3 by Kedar.</a>
     </div>
 	</div>
 
@@ -82,3 +95,9 @@
 	<script src="static/js/scripts.js"></script>
 </body>
 </html>
+
+
+<!--
+TODO:
+Add primary news source
+-->

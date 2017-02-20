@@ -45,7 +45,7 @@
 
     // Get news data on start
     newsFactory.get('/news' + location.search).then(function (data) {
-      $scope.country = data.country;
+      $scope.activeCountry = data.country;
       $scope.topStories = data.articles;
       $scope.mainSource = data.source;
     });

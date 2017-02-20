@@ -28,7 +28,8 @@
     console.log('minMatch: ', minMatch);
 
     _.each(newsResponses, function (response) {
-      // Loop through newsResponses for "related" news
+      // `newsResponses` does not have primary source stories now.
+      // Loop through newsResponses for "related" news.
       var _source = response.source;
 
       _.each (response.articles, function (article) {
@@ -40,7 +41,7 @@
       });
     });
 
-    console.log('SOURCE: ', primary.source);
+    primary.source = _.startCase(primary.source);
     _.each(primary.articles, function (articlePri) {
       console.log('\n\nPRIMARY: ');
       console.log(articlePri.title);
@@ -65,7 +66,7 @@
         });
       }
     });
-    // Sort articles by number of related articles - descending 
+    // Sort articles by number of related articles - descending
     primary.articles.sort(function(a, b) {
         return b.related.length - a.related.length;
     });
