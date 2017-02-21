@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div class="content" ng-app="newsApp" ng-controller="newsCtrl">
-		<header class="container columns">
+		<header class="container columns header">
 			<section class="column col-6 col-sm-12">
 				<a href="#" class="navbar-brand">{{ activeCountry }}</a>
 			</section>
@@ -36,12 +36,12 @@
 
     <div class="news-wrap" ng-if="topStories.length" ng-repeat="story in topStories">
         <div class="story stick"
-             style="background-image:url('{{story.urlToImage}}'), url('https://img.clipartfest.com/1c962854b2df5184288428f9a17084cf_world-globe-clipart-3-globe-of-the-world-clipart_1000-983.jpeg')">
+             style="background-image:url('{{story.urlToImage}}'), url('https://openclipart.org/image/2400px/svg_to_png/266674/World-Map-Globe-Dots.png')">
         </div>
         <div class="story flow">
           <div class="columns container story-header">
             <div class="column col-4 story-image"
-                 style="background-image:url('{{story.urlToImage}}'), url('https://img.clipartfest.com/1c962854b2df5184288428f9a17084cf_world-globe-clipart-3-globe-of-the-world-clipart_1000-983.jpeg')">
+                 style="background-image:url('{{story.urlToImage}}'), url('https://openclipart.org/image/2400px/svg_to_png/266674/World-Map-Globe-Dots.png')">
             </div>
             <div class="column col-8 col-sm-12 story-primary">
               <div class="story-title text-large">
@@ -99,5 +99,5 @@
 
 <!--
 TODO:
-Add primary news source
+Handle AggregateError in express
 -->
