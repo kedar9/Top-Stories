@@ -16,19 +16,17 @@ app.get('/', function(req, res) {
 });
 
 app.get('/news', function(req, res, next) {
-		var country = _.get(req, 'query.country', actions.defaultCountry);
+    var country = _.get(req, 'query.country', actions.defaultCountry);
 
-		if (_.get(actions.topStories, country)) {
-				// Data already exists. Return it.
-				res.json(_.get(actions.topStories, country));
-		} else {
-				actions.requestData(country)
-				.then(function (result) {
-            console.log('RESULT');
-            console.log(result);
-		        res.json(result);
-		    });
-		}
+    if (_.get(actions.topStories, country)) {
+        // Data already exists. Return it.
+        res.json(_.get(actions.topStories, country));
+    } else {
+        actions.requestData(country)
+        .then(function (result) {
+            res.json(result);
+        });
+    }
 });
 
 app.listen(port, function () {
