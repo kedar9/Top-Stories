@@ -11,7 +11,7 @@
     <!-- Responsive CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/responsive.min.css" />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|Khand:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Hind:300,400,700" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/styles.css" />
     <title>Top Stories</title>
@@ -19,8 +19,10 @@
 <body>
     <div class="content" ng-app="newsApp" ng-controller="newsCtrl">
         <header class="container columns header">
-            <section class="column col-6 col-sm-12">
-                <a href="#" class="navbar-brand">{{ activeCountry }}</a>
+            <section class="column col-6 col-sm-12 brand">
+                <img ng-src="{{'static/images/country-icons/' + activeCountry + '.png'}}"
+                     ng-if="activeCountry" class="country-img" />
+                <a href="/"><img src="static/images/top-stories.png" class="brand-img" /></a>
             </section>
             <section class="column col-6 col-sm-12 countries">
                 <a ng-repeat="country in countries" href="/?country={{ country.code }}"
@@ -30,11 +32,11 @@
         </section>
     </header>
 
-    <div class="text-center text-large" ng-if="!topStories">
+    <div class="text-center text-large message loading" ng-if="!topStories">
         Loading...
     </div>
 
-    <div class="text-center" ng-if="apiError">
+    <div class="text-center message" ng-if="apiError">
         <div class="text-large">This is awkward.</div>
         <div class="text-small">An error occured. Please try refreshing this page...</div>
     </div>
@@ -45,21 +47,36 @@
     </div>
     <div class="story flow">
         <div class="columns container story-header">
-            <div class="column col-4 story-image"
+            <div class="column col-12 story-image"
             style="background-image:url('{{story.urlToImage}}'), url('https://openclipart.org/image/2400px/svg_to_png/266674/World-Map-Globe-Dots.png')">
         </div>
-        <div class="column col-8 col-sm-12 story-primary">
+        <div class="column col-12 story-primary">
             <div class="story-title text-large">
                 {{ story.title }}
             </div>
-            <div class="story-desc text-medium">
-                {{ mainSource | uppercase }}: {{ story.description | limitTo: 199 }}<span ng-if="story.description.length > 199">...</span>
-                <div>
-                    <a href="{{ story.url }}" target="_blank" class="btn btn-primary">
-                        <span ng-hide="activeCountry === 'de'">Read Entire Story</span>
-                        <span ng-show="activeCountry === 'de'">Lesen Geschichte</span>
-                    </a>
-                </div>
+        </div>
+    </div>
+    <div class="story-desc text-medium">
+        {{ mainSource | uppercase }}: {{ story.description | limitTo: 249 }}
+        <span ng-if="story.description.length > 249">...</span>
+        <div class="columns story-desc--actions">
+            <a href="{{ story.url }}" target="_blank" class="col-3 col-sm-5 btn btn-primary">
+                <span ng-hide="activeCountry === 'de'">Read Entire Story</span>
+                <span ng-show="activeCountry === 'de'">Lesen Geschichte</span>
+            </a>
+            <div class="col-9 col-sm-7 story-share">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ story.url }}" target="_blank">
+                    <img src="static/images/social-icons/facebook.png" />
+                </a>
+                <a href="https://twitter.com/home?status={{ story.url }} target="_blank"">
+                    <img src="static/images/social-icons/twitter.png" />
+                </a>
+                <a href="mailto:?&body={{ story.url }} target="_blank"">
+                    <img src="static/images/social-icons/mail.png" />
+                </a>
+                <a href="whatsapp://send?text={{ story.url }}" class="mobile-only">
+                    <img src="static/images/social-icons/whatsapp.png" />
+                </a>
             </div>
         </div>
     </div>

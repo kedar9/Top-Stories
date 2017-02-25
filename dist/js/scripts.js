@@ -46,7 +46,7 @@
         newsFactory.get('/news' + location.search).then(function (data) {
             $scope.activeCountry = data.country;
             $scope.topStories = data.articles;
-            $scope.apiError = !$scope.topStories;
+            $scope.apiError = data.error;
             $scope.mainSource = data.source;
         });
 

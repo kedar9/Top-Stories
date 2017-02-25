@@ -11,8 +11,10 @@ console.log('apiUrl:: ', actions);
 // Expose static content from /dist/ on path /static/
 app.use('/static', express.static(__dirname + '/dist'));
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+// Handle 404 and 500
+app.use(function(err, req, res, next) {
+    res.status(404).send('404: Page not Found');
+    res.status(500).send('500: Internal Server Error');
 });
 
 app.get('/news', function(req, res, next) {
@@ -27,6 +29,10 @@ app.get('/news', function(req, res, next) {
             res.json(result);
         });
     }
+});
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.listen(port, function () {

@@ -84,7 +84,6 @@
     exports.defaultCountry = 'us';
     exports.requestData = function (country) {
         var requestUrls = [],
-            sortedNews = {},
             sources, minSources;
 
         if (_.keys(newsSources).indexOf(country) === -1) {
@@ -102,7 +101,7 @@
 
         return promise.some(requestUrls, minSources)
         .then(function (response) {
-            sortedNews = sortNews(response);
+            var sortedNews = sortNews(response);
 
             // URL params could have an incorrect country code.
             // Add code for the country to the news data.
@@ -112,10 +111,14 @@
             return sortedNews;
         })
         .catch(promise.AggregateError, function (e) {
-            return sortedNews;
+            return {
+                error: e
+            };
         })
         .catch(promise.TypeError, function (e) {
-            return sortedNews;
+            return {
+                error: e
+            };
         });
     };
 })();
