@@ -18,10 +18,13 @@ app.use(function(err, req, res, next) {
 });
 
 app.get('/news', function(req, res, next) {
-    var country = _.get(req, 'query.country', actions.defaultCountry);
+    var country = _.get(req, 'query.country', actions.defaultCountry),
+        preloadedData = _.get(actions.topStories, country),
+        today = new Date();
 
-    if (_.get(actions.topStories, country)) {
-        // Data already exists. Return it.
+    if (preloadedData && (today.getTime() - preloadedData.updateTime) < 43200000) {
+        // Data already exists and was loaded on the server in the last 12 hours.
+        console.log(today.getTime() - preloadedData.updateTime);
         res.json(_.get(actions.topStories, country));
     } else {
         actions.requestData(country)
