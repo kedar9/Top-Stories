@@ -17,6 +17,7 @@ a {
 
 .btn {
     text-transform: uppercase;
+    border-radius: 3px;
 }
 
 a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
@@ -102,8 +103,8 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
     background-position: center;
     background-repeat: no-repeat;
     filter: blur(0.5em);
-    -webkit-transform: scale(1.2, 1.2);
-    transform: scale(1.2, 1.2);
+    transform: scale(1.1, 1.1);
+    -webkit-transform: scale(1.1, 1.1);
     opacity: 0.75;
 }
 
@@ -230,15 +231,15 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
 /* Responsive code */
 @media (max-width: 600px) {
     .text-large {
-        font-size: 1.75em;
-    }
-
-    .text-medium {
         font-size: 1.5em;
     }
 
-    .text-small {
+    .text-medium {
         font-size: 1.25em;
+    }
+
+    .text-small {
+        font-size: 1em;
     }
 
     .brand {
@@ -252,6 +253,10 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
 
     .header {
         position: relative;
+    }
+
+    .story {
+        background-size: auto;
     }
 
     .flow {
@@ -273,8 +278,21 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
         margin: 0.5em;
     }
 
+    .story-desc--actions {
+        margin: 0.1em 0.1em 1em;
+    }
+
+    .story-desc--actions a.btn {
+        font-size: 0.9em;
+    }
+
     .story-share {
+        padding: 0.15em 0;
         text-align: right;
+    }
+
+    .story-share img {
+        width: 21px;
     }
 
     .story-share .mobile-only {
@@ -293,11 +311,11 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
     }
 
     .text-medium {
-        font-size: 1.5em;
+        font-size: 1.6em;
     }
 
     .text-small {
-        font-size: 1.25em;
+        font-size: 1.35em;
     }
 }
 

@@ -18,6 +18,15 @@
         };
     }]);
 
+    newsApp.config( [
+        '$compileProvider',
+        function( $compileProvider )
+        {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|whatsapp):/);
+            // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
+        }
+    ]);
+
     newsApp.controller('newsCtrl', ['$scope', 'newsFactory', function ($scope, newsFactory) {
         $scope.countries = [
             {

@@ -24,27 +24,25 @@
                      ng-if="activeCountry" class="country-img" />
                 <a href="/"><img src="static/images/top-stories.png" class="brand-img" /></a>
             </section>
-            <section class="column col-6 col-sm-12 countries">
+            <section class="column col-6 col-sm-12 countries" ng-if="countries">
                 <a ng-repeat="country in countries" href="/?country={{ country.code }}"
-                class="btn btn-link" ng-class="{ 'selected': country.code===activeCountry }">
-                {{ country.name }}
-            </a>
-        </section>
-    </header>
+                   class="btn btn-link" ng-class="{ 'selected': country.code===activeCountry }">
+                    {{ country.name }}
+                </a>
+            </section>
+        </header>
 
-    <div class="text-center text-large message loading" ng-if="!topStories">
-        Loading...
-    </div>
+        <div class="text-center text-large message loading" ng-if="!topStories && !apiError">
+            Loading...
+        </div>
+        <div class="text-center message" ng-if="apiError">
+            <div class="text-small">An error occured. Please try refreshing this page...</div>
+        </div>
 
-    <div class="text-center message" ng-if="apiError">
-        <div class="text-large">This is awkward.</div>
-        <div class="text-small">An error occured. Please try refreshing this page...</div>
-    </div>
-
-    <div class="news-wrap" ng-if="topStories.length" ng-repeat="story in topStories">
-        <div class="story stick"
-        style="background-image:url('{{story.urlToImage}}'), url('https://openclipart.org/image/2400px/svg_to_png/266674/World-Map-Globe-Dots.png')">
-    </div>
+        <div class="news-wrap" ng-if="topStories.length" ng-repeat="story in topStories">
+            <div class="story stick"
+            style="background-image:url('{{story.urlToImage}}'), url('https://openclipart.org/image/2400px/svg_to_png/266674/World-Map-Globe-Dots.png')">
+        </div>
     <div class="story flow">
         <div class="columns container story-header">
             <div class="column col-12 story-image"
@@ -56,51 +54,51 @@
             </div>
         </div>
     </div>
-    <div class="story-desc text-medium">
-        {{ mainSource | uppercase }}: {{ story.description | limitTo: 249 }}
-        <span ng-if="story.description.length > 249">...</span>
-        <div class="columns story-desc--actions">
-            <a href="{{ story.url }}" target="_blank" class="col-3 col-sm-5 btn btn-primary">
-                <span ng-hide="activeCountry === 'de'">Read Entire Story</span>
-                <span ng-show="activeCountry === 'de'">Lesen Geschichte</span>
-            </a>
-            <div class="col-9 col-sm-7 story-share">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ story.url }}" target="_blank">
-                    <img src="static/images/social-icons/facebook.png" />
+        <div class="story-desc text-medium">
+            {{ mainSource | uppercase }}: {{ story.description | limitTo: 249 }}
+            <span ng-if="story.description.length > 249">...</span>
+            <div class="columns story-desc--actions">
+                <a href="{{ story.url }}" target="_blank" class="col-3 col-sm-5 btn btn-primary">
+                    <span ng-hide="activeCountry === 'de'">Read Entire Story</span>
+                    <span ng-show="activeCountry === 'de'">Lesen Geschichte</span>
                 </a>
-                <a href="https://twitter.com/home?status={{ story.url }} target="_blank"">
-                    <img src="static/images/social-icons/twitter.png" />
-                </a>
-                <a href="mailto:?&body={{ story.url }} target="_blank"">
-                    <img src="static/images/social-icons/mail.png" />
-                </a>
-                <a href="whatsapp://send?text={{ story.url }}" class="mobile-only">
-                    <img src="static/images/social-icons/whatsapp.png" />
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="related">
-        <div class="text-medium" ng-if="story.related.length">
-            <ng-pluralize count="story.related.length"
-            when="{'one': 'Related Story:', 'other': 'Related Stories:'}"
-            ng-hide="activeCountry === 'de'"></ng-pluralize>
-            <ng-pluralize count="story.related.length"
-            when="{'one': 'Ähnliche Geschichte:', 'other': 'Ähnliche Geschichten:'}"
-            ng-show="activeCountry === 'de'"></ng-pluralize>
-        </div>
-        <div class="columns">
-            <div class="column col-2 story-related text-small" ng-repeat="related in story.related | limitTo : 4">
-                <div class="story-related-source">{{ related.source | uppercase }}</div>
-                <div class="story-related-link">
-                    <a href="{{ related.url }}" target="_blank">
-                        {{ related.title | limitTo: 75 }}<span ng-if="related.title.length > 75">...</span>
+                <div class="col-9 col-sm-7 story-share">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ story.url }}" target="_blank">
+                        <img src="static/images/social-icons/facebook.png" />
+                    </a>
+                    <a href="https://twitter.com/home?status={{ story.url }} target="_blank"">
+                        <img src="static/images/social-icons/twitter.png" />
+                    </a>
+                    <a href="mailto:?&body={{ story.url }} target="_blank"">
+                        <img src="static/images/social-icons/mail.png" />
+                    </a>
+                    <a href="whatsapp://send?text={{ story.url }}" class="mobile-only">
+                        <img src="static/images/social-icons/whatsapp.png" />
                     </a>
                 </div>
             </div>
         </div>
+        <div class="related">
+            <div class="text-medium" ng-if="story.related.length">
+                <ng-pluralize count="story.related.length"
+                when="{'one': 'Related Story:', 'other': 'Related Stories:'}"
+                ng-hide="activeCountry === 'de'"></ng-pluralize>
+                <ng-pluralize count="story.related.length"
+                when="{'one': 'Ähnliche Geschichte:', 'other': 'Ähnliche Geschichten:'}"
+                ng-show="activeCountry === 'de'"></ng-pluralize>
+            </div>
+            <div class="columns">
+                <div class="column col-2 story-related text-small" ng-repeat="related in story.related | limitTo : 4">
+                    <div class="story-related-source">{{ related.source | uppercase }}</div>
+                    <div class="story-related-link">
+                        <a href="{{ related.url }}" target="_blank">
+                            {{ related.title | limitTo: 75 }}<span ng-if="related.title.length > 75">...</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </div>
 
 <div class="footer text-center text-small" ng-if="topStories.length">
