@@ -18,6 +18,7 @@ a {
 .btn {
     text-transform: uppercase;
     border-radius: 3px;
+    padding-top: 0.75em;
 }
 
 a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
@@ -28,7 +29,6 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
     color: #007aff;
     border: 1px solid #007aff;
     background-color: #fafafc;
-    padding-top: 0.6em;
 }
 
 .btn.btn-primary:hover {
@@ -130,7 +130,6 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
     background-size: 200%;
     background-repeat: no-repeat;
     background-position: center 40%;
-    border: 1px solid;
     border-radius: 3px;
 }
 
@@ -253,10 +252,6 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
 
     .header {
         position: relative;
-    }
-
-    .story {
-        background-size: auto;
     }
 
     .flow {
