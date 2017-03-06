@@ -1,12 +1,11 @@
-var express = require('express');
-var _ = require('lodash');
-var app = express();
-var path = require('path');
-var port = process.env.PORT || 3000;
+var express = require('express'),
+    _ = require('lodash'),
+    app = express(),
+    path = require('path'),
+    port = process.env.PORT || 3000;
 
 // Custom JS
 var actions = require('./dist/actions.js');
-console.log('apiUrl:: ', actions);
 
 // Expose static content from /dist/ on path /static/
 app.use('/static', express.static(__dirname + '/dist'));
@@ -24,7 +23,6 @@ app.get('/news', function(req, res, next) {
 
     if (preloadedData && (today.getTime() - preloadedData.updateTime) < 43200000) {
         // Data already exists and was loaded on the server in the last 12 hours.
-        console.log(today.getTime() - preloadedData.updateTime);
         res.json(_.get(actions.topStories, country));
     } else {
         actions.requestData(country)
