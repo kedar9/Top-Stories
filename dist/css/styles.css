@@ -28,7 +28,7 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
     color: #007aff;
     border: 1px solid #007aff;
     background-color: #fafafc;
-    padding-top: 0.75em;
+    padding-top: 0.65em;
 }
 
 .btn.btn-primary:hover {
@@ -72,6 +72,7 @@ a:hover, .btn.btn-link:focus, .btn.btn-link:hover {
 
 .countries .btn, .countries .btn:active {
     color: #fafafc;
+    padding-top: 0.6em;
 }
 
 .countries .btn:hover {

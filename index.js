@@ -5,7 +5,7 @@ var express = require('express'),
     port = process.env.PORT || 3000;
 
 // Custom JS
-var actions = require('./dist/actions.js');
+var actions = require('./actions.js');
 
 // Expose static content from /dist/ on path /static/
 app.use('/static', express.static(__dirname + '/dist'));
@@ -30,6 +30,13 @@ app.get('/news', function(req, res, next) {
             res.json(result);
         });
     }
+});
+
+// Because AngularJS doesn't load before ExpressJS
+// ng scope property throws a 404 error in template.
+// For now just this particular path throws the 404 error.
+app.get('/%7B%7Bstory.urlToImage%7D%7D', function(req, res) {
+    res.send('');
 });
 
 app.get('/', function(req, res) {
