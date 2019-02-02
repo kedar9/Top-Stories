@@ -1,0 +1,30 @@
+@import './../../styles.scss';
+
+.round-choice {
+  display: flex;
+  position: relative;
+
+  &-img {
+    display: block;
+    border-radius: 50%;
+    background-color: $red;
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+
+  &-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: $dark-grey;
+    margin-left: 4.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &.selected {
+    .round-choice-title {
+      color: $red;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import './../../styles.scss';
+
+.header {
+  &-container {
+    height: 8rem;
+    padding: $logo-padding;
+    background-color: $white-grey;
+  }
+
+  &-title {
+    padding-left: 0;
+
+    .box-choice {
+      &-title {
+        font-size: 33px;
+        font-weight: 100;
+        color: $red;
+        text-decoration: none;
+        line-height: 4rem;
+      }
+
+      &-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 30px;
+        background-color: $red;
+      }
+    }
+  }
+
+  &-search {
+    position: absolute;
+    right: 0rem;
+    top: 8.5rem;
+
+    .ms-SearchBox {
+      background-color: transparent;
+      border-bottom-color: $grey;
+
+      &-field {
+        &::placeholder {
+          color: $grey;
+        }
+      }
+
+      &-icon {
+        color: $grey;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    &-search {
+      top: 4.25rem;
+    }
+  }
+}

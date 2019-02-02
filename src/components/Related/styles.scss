@@ -1,0 +1,41 @@
+@import './../../styles.scss';
+
+.related {
+  margin-top: 2rem;
+
+  &-article {
+    margin-top: 1rem;
+    padding: 0;
+
+    &-img {
+      height: 10rem;
+      background-size: cover;
+      background-position: 50% 20%;
+    }
+
+    &-title {
+      color: $dark-grey;
+
+      &:hover {
+        color: $red;
+      }
+    }
+
+    &-details {
+      text-transform: uppercase;
+    }
+  }
+
+  &.empty {
+    display: flex;
+    color: $red;
+    flex-wrap: wrap;
+
+    .ms-Shimmer-container {
+      max-width: 100%;
+      margin: -1rem 0;
+      overflow-x: hidden;
+      transform: scale(1, 0.5);
+    }
+  }
+}

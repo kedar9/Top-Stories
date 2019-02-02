@@ -1,0 +1,44 @@
+@import './../../styles.scss';
+
+.popular {
+  padding: 0 3%;
+
+  &-heading {
+    margin: 1.5rem 0 2rem;
+
+    .box-choice-title {
+      font-size: 1.75rem;
+      margin-left: 4rem !important;
+    }
+  }
+
+  &-topics {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .topic {
+    min-width: 33.33%;
+
+    &-choice {
+      margin: 0.5rem 0;
+    }
+  }
+
+  @media only screen and (max-width: 640px) {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    margin-top: 2rem;
+    padding: 0;
+
+    .topic {
+      min-width: 100%;
+
+      &-choice {
+        margin: 1rem 0;
+      }
+    }
+  }
+}

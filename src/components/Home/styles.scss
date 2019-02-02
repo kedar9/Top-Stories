@@ -1,0 +1,37 @@
+@import './../../styles.scss';
+
+.top-stories {
+  a {
+    text-decoration: none !important;
+  }
+
+  .articles {
+    padding: 2rem 3% 0;
+
+    .ms-Shimmer-container {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    hr {
+      border: 0.5px solid $red;
+      margin: 2.5rem 0;
+    }
+  }
+
+  .made-by {
+    width: 20rem;
+    display: block;
+    padding: 1rem 3%;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    &-content {
+      margin-left: $logo-padding + $sidebar-width + $logo-padding;
+    }
+
+    .made-by {
+      padding: 0 3% 1rem;
+    }
+  }
+}

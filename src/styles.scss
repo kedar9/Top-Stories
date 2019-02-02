@@ -1,0 +1,43 @@
+$dark-grey: #333333;
+$grey: #787878;
+$light-grey: #999999;
+$white-grey: #f4f4f2;
+$background-white: #fafafa;
+$red: #c00000;
+$blue: #5ac8fa;
+
+$logo-padding: 2rem;
+$sidebar-width: 25rem;
+
+html {
+  font-size: 10px;
+
+  body {
+    margin: 0;
+    background-color: $background-white;
+  }
+
+  .ms-Grid-row {
+    margin: 0;
+  }
+
+  .ms-Grid {
+    padding: 0;
+  }
+
+  .ms-Spinner-circle {
+    border-color: $red $light-grey $light-grey;
+  }
+
+  .ms-Shimmer-shimmerWrapper {
+    background-color: rgba($red, 0.06)
+  }
+
+  .ms-ShimmerGap-root {
+    background-color: $background-white;
+  }
+
+  .ms-ShimmerLine-root {
+    border-color: $background-white;
+  }
+}

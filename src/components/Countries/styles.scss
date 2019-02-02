@@ -1,0 +1,9 @@
+@import './../../styles.scss';
+
+.countries {
+  .country {
+    &-choice {
+      margin: 1rem 0;
+    }
+  }
+}

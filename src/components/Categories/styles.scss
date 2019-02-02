@@ -1,0 +1,11 @@
+@import './../../styles.scss';
+
+.categories {
+  margin-top: 5rem;
+
+  .category {
+    margin: 1rem 0;
+    display: block;
+    text-transform: capitalize;
+  }
+}

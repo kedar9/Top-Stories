@@ -1,0 +1,107 @@
+@import './../../styles.scss';
+
+.sidebar {
+  .clear {
+    margin: 1rem 0;
+  }
+
+  &-header {
+    padding: 0 $logo-padding 0.5rem;
+    background-color: $white-grey;
+  }
+
+  &-title {
+    .box-choice {
+      padding: $logo-padding 0;
+
+      &-title {
+        font-size: 33px;
+        font-weight: 100;
+        color: $red;
+        text-decoration: none;
+        line-height: 4.5rem;
+      }
+
+      &-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 30px;
+        background-color: $red;
+      }
+    }
+  }
+
+  &-search {
+    .ms-SearchBox {
+      background-color: transparent;
+      border-bottom-color: $grey;
+
+      &-field {
+        &::placeholder {
+          color: $grey;
+        }
+      }
+
+      &-icon {
+        color: $grey;
+      }
+    }
+  }
+
+  &-options {
+    display: flex;
+    padding: 0 $logo-padding;
+  }
+
+  &-region {
+    cursor: pointer;
+    width: 50%;
+  }
+
+  &-categories {
+    cursor: pointer;
+    .box-choice-title {
+      text-transform: capitalize;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    width: $sidebar-width;
+    height: 100vh;
+    padding-right: $logo-padding;
+    position: fixed;
+    background-color: $white-grey;
+
+    .clear {
+      margin: 3rem 0;
+    }
+
+    &-options {
+      display: block;
+    }
+
+    &-region {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    &-container {
+      height: 6rem;
+      padding: 1.5rem;
+    }
+
+    &-title {
+      .box-choice {
+        &-title {
+          font-size: 36px;
+          margin-top: -3px;
+        }
+      }
+    }
+
+    &-search {
+      top: 3.5rem;
+    }
+  }
+}

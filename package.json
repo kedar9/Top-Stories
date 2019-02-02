@@ -1,20 +1,50 @@
 {
   "name": "top-stories",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node ./server/index.js",
+    "devstart": "webpack --mode development && node ./server/index.js",
+    "devbuild": "webpack --mode development",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Kedar G",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kedar9/Top-Stories.git"
+  },
+  "author": "Kedar Gadge",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kedar9/Top-Stories/issues"
+  },
+  "homepage": "https://github.com/kedar9/Top-Stories#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+    "terser": "3.14.1"
+  },
   "dependencies": {
-    "bluebird": "^3.4.7",
-    "express": "^4.14.1",
-    "lodash": "^4.17.4",
-    "request": "^2.79.0",
-    "request-promise": "^4.1.1",
-    "string-similarity": "^1.1.0"
+    "express": "^4.16.4",
+    "express-ip": "^1.0.3",
+    "heroku-ssl-redirect": "0.0.4",
+    "newsapi": "^2.4.0",
+    "node-fetch": "^2.3.0",
+    "office-ui-fabric-react": "^6.136.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "string-similarity": "^3.0.0"
   }
 }
